@@ -9,7 +9,7 @@ import os
 script_dir = os.path.dirname(os.path.abspath(__file__))
 root_path = os.path.abspath(os.path.join(script_dir, ".."))
 
-m2 = joblib.load(os.path.join(root_path, "labeled2.pkl"))
+m2 = joblib.load(os.path.join(root_path, "labeled.pkl"))
 m1_dir = os.path.join(root_path, "old")
 m1 = joblib.load(os.path.join(m1_dir, "deals_model.pkl"))
 m1_scaler = joblib.load(os.path.join(m1_dir, "scaler.pkl"))
