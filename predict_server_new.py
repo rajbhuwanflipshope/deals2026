@@ -21,7 +21,7 @@ m1_scaler = joblib.load(os.path.join(m1_dir, "scaler.pkl"))
 m1_encoder = joblib.load(os.path.join(m1_dir, "encoder.pkl"))
 
 m1_cols = list(m1.feature_names_in_)
-features_m2 = list(getattr(m2, "feature_names_in_", ["price", "median", "min_180", "flash_factor"]))
+features_m2 = list(getattr(m2, "feature_names_in_", ["price", "median", "min", "flash_factor"]))
 
 category_avg_discount = {
     1:45, 2:35, 3:55, 4:30, 5:30, 6:20, 7:25, 8:45, 9:45,
@@ -59,6 +59,8 @@ while True:
 
         df = pd.DataFrame([data])
         df["category"] = df["category"].astype(int)
+
+       
 
         df_m1 = df.copy()
         encoded = m1_encoder.transform(df_m1[["category"]])
