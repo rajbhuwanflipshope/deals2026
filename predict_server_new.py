@@ -7,10 +7,15 @@ import json
 import os
 
 script_dir = os.path.dirname(os.path.abspath(__file__))
-root_path = os.path.abspath(os.path.join(script_dir, ".."))
+# labeled.pkl, deals_model.pkl, scaler.pkl, and encoder.pkl all live directly
+# alongside this script (no parent "old" directory exists on disk) — the
+# previous script_dir/".." lookup pointed one level too high, e.g. /root
+# instead of /root/deals2026, which is why joblib.load kept failing with
+# FileNotFoundError for labeled.pkl.
+root_path = script_dir
 
 m2 = joblib.load(os.path.join(root_path, "labeled.pkl"))
-m1_dir = os.path.join(root_path, "old")
+m1_dir = root_path
 m1 = joblib.load(os.path.join(m1_dir, "deals_model.pkl"))
 m1_scaler = joblib.load(os.path.join(m1_dir, "scaler.pkl"))
 m1_encoder = joblib.load(os.path.join(m1_dir, "encoder.pkl"))
