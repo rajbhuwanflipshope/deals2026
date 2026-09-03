@@ -42,9 +42,9 @@ while True:
 
         # M1
         d1 = df.copy()
-        enc = encoder.transform(d1[["category"]])
-        enc = pd.DataFrame(enc, columns=encoder.get_feature_names_out(["category"]), index=d1.index)
-        d1[num_cols] = scaler.transform(d1[num_cols])
+        enc = m1_encoder.transform(d1[["category"]])
+        enc = pd.DataFrame(enc, columns=m1_encoder.get_feature_names_out(["category"]), index=d1.index)
+        d1[num_cols] = m1_scaler.transform(d1[num_cols])
         X1 = pd.concat([d1.drop(columns="category"), enc], axis=1)[m1_cols]
         s1 = int(round(float(m1.predict_proba(X1)[0,1]) * 1000))
 
